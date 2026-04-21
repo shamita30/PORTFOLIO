@@ -18,7 +18,7 @@ services:
       - key: GMAIL_SEND_TO
         value: shami2230sr12@gmail.com
       - key: FRONTEND_URL
-        value: https://portfolio-st7f.onrender.com
+        value: https://shamitaportfolio.netlify.app
       - key: SECRET_KEY
         generateValue: true
 

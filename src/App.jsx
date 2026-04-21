@@ -256,7 +256,7 @@ export default function App() {
         <div className="social-links">
           <a href="https://github.com/shamita30"             target="_blank" rel="noreferrer" className="social-link" title="GitHub">⚡</a>
           <a href="mailto:shami2230sr12@gmail.com"           className="social-link" title="Email">✉️</a>
-          <a href="https://portfolio-st7f.onrender.com/"     target="_blank" rel="noreferrer" className="social-link" title="Portfolio">🌐</a>
+          <a href="https://shamitaportfolio.netlify.app/"     target="_blank" rel="noreferrer" className="social-link" title="Portfolio">🌐</a>
           <a href="tel:+919786619687"                        className="social-link" title="Phone">📞</a>
         </div>
         <p style={{ marginTop: 12, fontSize: '11px', opacity: 0.4 }}>

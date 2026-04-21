@@ -13,7 +13,7 @@ Required environment variables on Render:
   GMAIL_REFRESH_TOKEN   – Refresh token from one-time auth flow
   GMAIL_SEND_FROM       – Gmail address to send from (shami2230sr12@gmail.com)
   GMAIL_SEND_TO         – Recipient email (shami2230sr12@gmail.com)
-  FRONTEND_URL          – Frontend URL for CORS (https://portfolio-st7f.onrender.com)
+  FRONTEND_URL          – Frontend URL for CORS (https://shamitaportfolio.netlify.app)
   SECRET_KEY            – Random secret for Flask session
 """
 
@@ -32,7 +32,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-please-change')
 
 # ── CORS: only allow your frontend origin ──────────────────────────────────────
-FRONTEND_URL = os.environ.get('FRONTEND_URL', 'https://portfolio-st7f.onrender.com')
+FRONTEND_URL = os.environ.get('FRONTEND_URL', 'https://shamitaportfolio.netlify.app')
 CORS(app, origins=[FRONTEND_URL, 'http://localhost:5173', 'http://localhost:4173'])
 
 # ── Gmail OAuth2 credentials ──────────────────────────────────────────────────

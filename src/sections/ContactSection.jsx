@@ -104,7 +104,7 @@ export default function ContactSection() {
                 { icon: '✉️', label: 'shami2230sr12@gmail.com', href: 'mailto:shami2230sr12@gmail.com', color: 'rgba(214,0,127,0.15)' },
                 { icon: '📞', label: '+91 9786619687', href: 'tel:+919786619687',  color: 'rgba(8,145,178,0.15)' },
                 { icon: '⚡', label: 'github.com/shamita30',  href: 'https://github.com/shamita30', color: 'rgba(124,58,237,0.15)', target: '_blank' },
-                { icon: '🌐', label: 'portfolio-st7f.onrender.com', href: 'https://portfolio-st7f.onrender.com/', color: 'rgba(234,88,12,0.15)', target: '_blank' },
+                { icon: '🌐', label: 'shamitaportfolio.netlify.app', href: 'https://shamitaportfolio.netlify.app/', color: 'rgba(234,88,12,0.15)', target: '_blank' },
                 { icon: '💼', label: 'LinkedIn Profile', href: '#', color: 'rgba(37,99,235,0.15)' },
               ].map(({ icon, label, href, color, target }) => (
                 <a
