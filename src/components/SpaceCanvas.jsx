@@ -487,19 +487,19 @@ export default function SpaceCanvas({ mousePos, loaded, theme, ghStats }) {
           <Stars
             radius={120}
             depth={60}
-            count={3000}
-            factor={isDark ? 3 : 0.5}
+            count={1000}
+            factor={isDark ? 2 : 0.5}
             saturation={0}
             fade
-            speed={0.3}
+            speed={0.1}
           />
 
           {/* Glowing snowflake particles */}
-          <Sparkles count={80} scale={25} size={1.5} speed={0.15} color={isDark ? '#ffffff' : C.frostBlue} opacity={isDark ? 0.5 : 0.15} />
-          <Sparkles count={50} scale={20} size={1} speed={0.2} color={C.gold} opacity={isDark ? 0.3 : 0.1} />
+          <Sparkles count={30} scale={25} size={1.5} speed={0.15} color={isDark ? '#ffffff' : C.frostBlue} opacity={isDark ? 0.3 : 0.15} />
+          <Sparkles count={20} scale={20} size={1} speed={0.2} color={C.gold} opacity={isDark ? 0.2 : 0.1} />
 
           {/* ── SNOWFALL ── */}
-          <Snowfall count={100} isDark={isDark} />
+          <Snowfall count={40} isDark={isDark} />
 
           {/* ── CHRISTMAS TREE (center-back) ── */}
           <ChristmasTree position={[0, -2, -12]} scale={2.5} isDark={isDark} />
@@ -528,20 +528,15 @@ export default function SpaceCanvas({ mousePos, loaded, theme, ghStats }) {
           {/* Camera rig */}
           <CameraRig mousePos={mousePos} />
 
-          {/* Post-processing */}
-          <EffectComposer>
+          {/* Post-processing (Optimized) */}
+          <EffectComposer multisampling={0}>
             <Bloom
-              luminanceThreshold={isDark ? 0.25 : 0.85}
+              luminanceThreshold={isDark ? 0.3 : 0.85}
               luminanceSmoothing={isDark ? 0.9 : 0.4}
-              intensity={isDark ? 1.5 : 0.3}
-              mipmapBlur
+              intensity={isDark ? 1.0 : 0.3}
+              mipmapBlur={false}
             />
             {isDark && <Vignette eskil={false} offset={0.3} darkness={0.6} />}
-            <ChromaticAberration
-              offset={new Vector2(0.0006, 0.0006)}
-              radialModulation={false}
-              modulationOffset={0}
-            />
           </EffectComposer>
 
           {/* Preload all geometries */}

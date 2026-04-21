@@ -44,17 +44,18 @@ export default function App() {
   const [theme,         setTheme]         = useState(getInitialTheme)
   const [sound,         setSound]         = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
-  const [scrollPct,     setScrollPct]     = useState(0)
   const [mousePos,      setMousePos]      = useState({ x: 0, y: 0 })
 
   // ── GitHub Stats (drives 3D crystal in scene) ─────────────────
   const ghStats = useGitHubStats('shamita30')
 
   const cursorRef  = useRef(null)
-  const ringRef    = useRef(null)
-  const ringPos    = useRef({ x: 0, y: 0 })
-  const audioRef   = useRef(null)
-  const rafRef     = useRef(null)
+  const ringRef          = useRef(null)
+  const scrollBarRef     = useRef(null)
+  const ringPos          = useRef({ x: 0, y: 0 })
+  const audioRef         = useRef(null)
+  const playedAudios     = useRef(new Set())
+  const rafRef           = useRef(null)
 
   // ── Loading ─────────────────────────────────────────────────────
   useEffect(() => {
@@ -140,7 +141,11 @@ export default function App() {
   useEffect(() => {
     const onScroll = () => {
       const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
-      setScrollPct(pct)
+      // Update DOM directly to prevent React from re-rendering the whole 3D canvas and causing lag
+      if (scrollBarRef.current) {
+        scrollBarRef.current.style.width = `${pct}%`
+      }
+      
       const sectionEls = document.querySelectorAll('section[id]')
       sectionEls.forEach(el => {
         const rect = el.getBoundingClientRect()
@@ -161,32 +166,33 @@ export default function App() {
     return () => obs.disconnect()
   }, [loaded])
 
-  // ── Space ambient sound ────────────────────────────────────────
+  // ── Christmas ambient sound ────────────────────────────────────
   useEffect(() => {
     if (sound) {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext
-      if (!AudioCtx) return
-      const ctx = new AudioCtx()
-      const createDrone = (freq, gain) => {
-        const osc = ctx.createOscillator()
-        const g   = ctx.createGain()
-        osc.frequency.value = freq
-        osc.type = 'sine'
-        g.gain.value = gain
-        osc.connect(g); g.connect(ctx.destination); osc.start()
-        return { osc, gain: g }
-      }
-      const drones = [
-        createDrone(55,    0.03),
-        createDrone(82.4,  0.02),
-        createDrone(110,   0.015),
-        createDrone(146.8, 0.01),
+      const songs = [
+        'https://leedsharmonica.uk/resources/xmas-songs/mp3/We-Wish-You-A-Merry-Christmas.mp3',
+        'https://leedsharmonica.uk/resources/xmas-songs/mp3/Jingle-Bells.mp3',
+        'https://leedsharmonica.uk/resources/xmas-songs/mp3/Deck-The-Halls.mp3'
       ]
-      audioRef.current = { ctx, drones }
+      
+      // Pick a random song we haven't played recently
+      let available = songs.filter(s => !playedAudios.current.has(s))
+      if (available.length === 0) {
+        playedAudios.current.clear()
+        available = songs
+      }
+      const selected = available[Math.floor(Math.random() * available.length)]
+      playedAudios.current.add(selected)
+
+      const audio = new Audio(selected)
+      audio.loop = true
+      audio.volume = 0.4
+      audio.play().catch(e => console.warn('Audio play prevented:', e))
+      audioRef.current = audio
     } else {
       if (audioRef.current) {
-        audioRef.current.drones.forEach(d => { d.osc.stop(); d.osc.disconnect() })
-        audioRef.current.ctx.close()
+        audioRef.current.pause()
+        audioRef.current.currentTime = 0
         audioRef.current = null
       }
     }
@@ -212,10 +218,16 @@ export default function App() {
       <div id="noise" />
 
       {/* Scroll progress bar */}
-      <div id="scroll-progress" style={{ width: `${scrollPct}%` }} />
+      <div id="scroll-progress" ref={scrollBarRef} style={{ width: '0%' }} />
 
       {/* 3D Christmas Background */}
-      <SpaceCanvas mousePos={mousePos} loaded={loaded} theme={theme} ghStats={ghStats} />
+      <SpaceCanvas 
+        mousePos={mousePos} 
+        loaded={loaded} 
+        theme={theme} 
+        ghStats={ghStats} 
+        style={{ pointerEvents: 'none' }}
+      />
 
       {/* Navigation */}
       <Navigation theme={theme} toggleTheme={toggleTheme} sound={sound} setSound={setSound} />
