@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import SmoothScroll from './components/SmoothScroll'
+import useGitHubStats from './hooks/useGitHubStats'
 import SpaceCanvas from './components/SpaceCanvas'
 import LoadingScreen from './components/LoadingScreen'
 import Navigation from './components/Navigation'
@@ -45,6 +46,9 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('hero')
   const [scrollPct,     setScrollPct]     = useState(0)
   const [mousePos,      setMousePos]      = useState({ x: 0, y: 0 })
+
+  // ── GitHub Stats (drives 3D crystal in scene) ─────────────────
+  const ghStats = useGitHubStats('shamita30')
 
   const cursorRef  = useRef(null)
   const ringRef    = useRef(null)
@@ -210,8 +214,8 @@ export default function App() {
       {/* Scroll progress bar */}
       <div id="scroll-progress" style={{ width: `${scrollPct}%` }} />
 
-      {/* 3D Space Background */}
-      <SpaceCanvas mousePos={mousePos} loaded={loaded} />
+      {/* 3D Christmas Background */}
+      <SpaceCanvas mousePos={mousePos} loaded={loaded} theme={theme} ghStats={ghStats} />
 
       {/* Navigation */}
       <Navigation theme={theme} toggleTheme={toggleTheme} sound={sound} setSound={setSound} />
@@ -236,9 +240,17 @@ export default function App() {
 
       {/* Footer */}
       <footer className="footer">
+        {/* GitHub Stats Badge */}
+        {!ghStats.loading && (
+          <div className="gh-stats-badge">
+            <span>🎄 {ghStats.repos} repos</span>
+            <span>⭐ {ghStats.stars} stars</span>
+            <span>🔥 {ghStats.contributions} contributions</span>
+          </div>
+        )}
         <p>
           Designed &amp; built with{' '}
-          <span style={{ color: 'var(--pink)', WebkitTextFillColor: 'var(--pink)' }}>♥</span>
+          <span style={{ color: 'var(--crimson, #dc2626)', WebkitTextFillColor: 'var(--crimson, #dc2626)' }}>♥</span>
           {' '}by <span>Shamita Rathinaraj</span> · Chennai, India
         </p>
         <div className="social-links">

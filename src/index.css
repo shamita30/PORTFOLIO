@@ -1,50 +1,51 @@
 /* ╔══════════════════════════════════════╗
-   ║   SHAMITA SPACE PORTFOLIO — GLOBAL  ║
+   ║  SHAMITA PORTFOLIO — CHRISTMAS THEME ║
    ╚══════════════════════════════════════╝ */
 
-/* ── DARK THEME (default) ── */
+/* ── DARK THEME (default) ── "Midnight Frost" ── */
 :root,
 [data-theme="dark"] {
-  --pink: #ff6eb4;
-  --purple: #a855f7;
-  --blue: #3b82f6;
-  --cyan: #06b6d4;
-  --orange: #f97316;
-  --green: #22d3ee;
+  --pink:   #dc2626;
+  --purple: #818cf8;
+  --blue:   #58c4e6;
+  --cyan:   #10b981;
+  --orange: #fbbf24;
+  --green:  #10b981;
+  --crimson: #dc2626;
 
   /* Backgrounds */
-  --bg-page:        #02020f;
-  --bg-page2:       #07071a;
-  --bg-card:        rgba(7, 7, 26, 0.70);
-  --bg-card-solid:  #0b0b22;
-  --bg-glass:       rgba(255, 255, 255, 0.05);
-  --border-glass:   rgba(255, 255, 255, 0.10);
-  --border-card:    rgba(255, 255, 255, 0.08);
+  --bg-page:        #050d18;
+  --bg-page2:       #0a1628;
+  --bg-card:        rgba(5, 13, 24, 0.75);
+  --bg-card-solid:  #0c1a2e;
+  --bg-glass:       rgba(88, 196, 230, 0.06);
+  --border-glass:   rgba(88, 196, 230, 0.12);
+  --border-card:    rgba(88, 196, 230, 0.08);
 
   /* Typography */
-  --text-primary:   #f0f0ff;
-  --text-secondary: rgba(200, 200, 255, 0.75);
-  --text-muted:     rgba(180, 180, 220, 0.55);
-  --text-disabled:  rgba(180, 180, 220, 0.30);
+  --text-primary:   #e8f4f8;
+  --text-secondary: rgba(232, 244, 248, 0.78);
+  --text-muted:     rgba(180, 210, 230, 0.55);
+  --text-disabled:  rgba(180, 210, 230, 0.30);
 
   /* Nav */
-  --nav-bg: rgba(2, 2, 15, 0.75);
+  --nav-bg: rgba(5, 13, 24, 0.80);
 
   /* Tags / chips */
-  --chip-bg:     rgba(255, 255, 255, 0.06);
-  --chip-border: rgba(255, 255, 255, 0.10);
-  --chip-text:   rgba(180, 180, 220, 0.75);
+  --chip-bg:     rgba(88, 196, 230, 0.08);
+  --chip-border: rgba(88, 196, 230, 0.15);
+  --chip-text:   rgba(180, 210, 230, 0.75);
 
   /* Floating chips */
-  --float-chip-bg: rgba(7, 7, 26, 0.88);
+  --float-chip-bg: rgba(10, 22, 40, 0.90);
 
   /* Hero tagline */
-  --hero-tagline: rgba(200, 200, 255, 0.75);
+  --hero-tagline: rgba(232, 244, 248, 0.70);
 
   /* Scrollbar */
-  --scrollbar-track: #02020f;
+  --scrollbar-track: #050d18;
 
-  /* Legacy aliases (keep old vars working) */
+  /* Legacy aliases */
   --dark:        var(--bg-page);
   --dark2:       var(--bg-page2);
   --glass:       var(--bg-glass);
@@ -53,46 +54,47 @@
   --muted:       var(--text-muted);
 }
 
-/* ── LIGHT THEME ── */
+/* ── LIGHT THEME ── "Frost Morning" ── */
 [data-theme="light"] {
-  --pink:  #d6007f;
-  --purple:#7c3aed;
-  --blue:  #2563eb;
-  --cyan:  #0891b2;
-  --orange:#ea580c;
-  --green: #0e9f9f;
+  --pink:  #b91c1c;
+  --purple:#6366f1;
+  --blue:  #0891b2;
+  --cyan:  #059669;
+  --orange:#d97706;
+  --green: #059669;
+  --crimson: #b91c1c;
 
   /* Backgrounds */
-  --bg-page:        #f4f2ff;
-  --bg-page2:       #edeaff;
-  --bg-card:        rgba(255, 255, 255, 0.82);
+  --bg-page:        #e8f4f8;
+  --bg-page2:       #dbeef4;
+  --bg-card:        rgba(255, 255, 255, 0.85);
   --bg-card-solid:  #ffffff;
-  --bg-glass:       rgba(255, 255, 255, 0.75);
-  --border-glass:   rgba(100, 80, 200, 0.18);
-  --border-card:    rgba(100, 80, 200, 0.14);
+  --bg-glass:       rgba(255, 255, 255, 0.78);
+  --border-glass:   rgba(10, 46, 77, 0.15);
+  --border-card:    rgba(10, 46, 77, 0.10);
 
-  /* Typography  — all must contrast on white / light purple bg */
-  --text-primary:   #0f0825;
-  --text-secondary: #2e1f5e;
-  --text-muted:     #5d4e8a;
-  --text-disabled:  rgba(80, 60, 140, 0.40);
+  /* Typography */
+  --text-primary:   #0a2e4d;
+  --text-secondary: #1a4a6a;
+  --text-muted:     #3d7a9e;
+  --text-disabled:  rgba(10, 46, 77, 0.35);
 
   /* Nav */
-  --nav-bg: rgba(241, 238, 255, 0.88);
+  --nav-bg: rgba(232, 244, 248, 0.90);
 
   /* Tags / chips */
-  --chip-bg:     rgba(100, 80, 200, 0.08);
-  --chip-border: rgba(100, 80, 200, 0.18);
-  --chip-text:   #3b2a7a;
+  --chip-bg:     rgba(10, 46, 77, 0.06);
+  --chip-border: rgba(10, 46, 77, 0.15);
+  --chip-text:   #0a2e4d;
 
   /* Floating chips */
   --float-chip-bg: rgba(255, 255, 255, 0.95);
 
   /* Hero tagline */
-  --hero-tagline: #2e1f5e;
+  --hero-tagline: #1a4a6a;
 
   /* Scrollbar */
-  --scrollbar-track: #f0ecff;
+  --scrollbar-track: #dbeef4;
 
   /* Legacy aliases */
   --dark:        var(--bg-page);
@@ -1672,4 +1674,44 @@ body {
 
 .planet-nav-dot:hover .planet-nav-dot-label {
   opacity: 1;
+}
+
+/* ── GITHUB STATS BADGE ── */
+.gh-stats-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 20px;
+  padding: 12px 28px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.gh-stats-badge span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.gh-stats-badge span:hover {
+  color: var(--blue);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .gh-stats-badge {
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 16px;
+    font-size: 12px;
+  }
 }
