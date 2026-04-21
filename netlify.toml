@@ -1,0 +1,17 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Single Page Application routing (Redirect all requests to index.html)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Proxy API requests to your Python Render backend (so you don't get CORS issues)
+# Replace the 'to' URL with your actual backend Render URL once deployed
+[[redirects]]
+  from = "/api/*"
+  to = "https://shamita-portfolio-backend.onrender.com/api/:splat"
+  status = 200
+  force = true
