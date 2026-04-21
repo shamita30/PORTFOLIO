@@ -1,0 +1,54 @@
+export default function Navigation({ theme, toggleTheme, sound, setSound }) {
+  const scrollTo = (id) => {
+    if (window.__lenis) {
+      const el = document.getElementById(id)
+      if (el) window.__lenis.scrollTo(el, { offset: -80, duration: 1.4 })
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  return (
+    <nav className="nav">
+      <a href="#hero" className="nav-logo" onClick={e => { e.preventDefault(); scrollTo('hero') }}>
+        SR
+      </a>
+      <ul className="nav-links">
+        {[
+          ['about', 'About'],
+          ['skills', 'Skills'],
+          ['projects', 'Projects'],
+          ['certificates', 'Certs'],
+          ['leadership', 'Events'],
+          ['experience', 'Experience'],
+          ['contact', 'Contact'],
+        ].map(([id, label]) => (
+          <li key={id}>
+            <a
+              href={`#${id}`}
+              onClick={e => { e.preventDefault(); scrollTo(id) }}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div className="nav-right">
+        <button className="sound-btn" onClick={() => setSound(s => !s)} title={sound ? 'Mute space ambient' : 'Play space ambient'}>
+          {sound ? '🔊' : '🔇'}
+        </button>
+        <button className="nav-theme-btn" onClick={toggleTheme}>
+          {theme === 'dark' ? '☀ Light' : '🌑 Dark'}
+        </button>
+        <a
+          href="/shamita_resume.pdf"
+          className="btn-primary"
+          style={{ padding: '8px 18px', fontSize: '12px' }}
+          download
+        >
+          Resume ↓
+        </a>
+      </div>
+    </nav>
+  )
+}

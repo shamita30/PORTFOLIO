@@ -1,0 +1,109 @@
+const EVENTS = [
+  {
+    id: 1,
+    icon: '🚀',
+    title: 'SIH 2024 — Team Lead',
+    sub: 'Smart India Hackathon Finalist. Led team to develop cryptocurrency transaction solutions.',
+    color: 'linear-gradient(135deg, rgba(168,85,247,0.25), rgba(255,110,180,0.2))',
+    accent: '#a855f7',
+  },
+  {
+    id: 2,
+    icon: '🎪',
+    title: 'Symposium Secretary',
+    sub: 'Collaborated with creative ideas for college event planning as an executive and organized events.',
+    color: 'linear-gradient(135deg, rgba(6,182,212,0.25), rgba(59,130,246,0.2))',
+    accent: '#06b6d4',
+  },
+  {
+    id: 3,
+    icon: '🌐',
+    title: 'MUN — International Press',
+    sub: 'Served as International Press in MUN club, covering global affairs and diplomatic discussions.',
+    color: 'linear-gradient(135deg, rgba(249,115,22,0.25), rgba(255,110,180,0.2))',
+    accent: '#f97316',
+  },
+  {
+    id: 4,
+    icon: '📋',
+    title: 'National Conference 2025',
+    sub: 'Student Co-Ordinator for National conference 2025, managing sessions and participants.',
+    color: 'linear-gradient(135deg, rgba(255,110,180,0.25), rgba(168,85,247,0.2))',
+    accent: '#ff6eb4',
+  },
+  {
+    id: 5,
+    icon: '🏆',
+    title: 'Best Student Award',
+    sub: 'Recognized as Best Student by the institution for outstanding academic and extracurricular performance.',
+    color: 'linear-gradient(135deg, rgba(34,211,238,0.25), rgba(6,182,212,0.2))',
+    accent: '#22d3ee',
+  },
+  {
+    id: 6,
+    icon: '♟️',
+    title: 'Chess Tournament Participant',
+    sub: 'Competitive chess player, representing the college in inter-college chess tournaments.',
+    color: 'linear-gradient(135deg, rgba(59,130,246,0.25), rgba(168,85,247,0.2))',
+    accent: '#3b82f6',
+  },
+]
+
+export default function LeadershipSection() {
+  return (
+    <section id="leadership" className="section-wrap" style={{ background: 'linear-gradient(180deg, transparent, rgba(255,110,180,0.03), transparent)' }}>
+      <div className="section-inner">
+        <div className="section-tag">Impact</div>
+        <h2 className="section-title reveal">
+          Leadership &{' '}
+          <span className="grad-pink">Events</span>
+        </h2>
+        <p className="section-sub reveal">
+          Beyond code — leading teams, organizing events, and making an impact in the community.
+        </p>
+
+        <div className="upload-hint-banner reveal">
+          <span style={{ fontSize: '20px' }}>📷</span>
+          <span>
+            <strong>Add Event Photos:</strong> Upload images to <code style={{ background: 'rgba(255,255,255,0.08)', padding: '2px 6px', borderRadius: '4px' }}>/public/uploads/events/</code> to display your event gallery
+          </span>
+        </div>
+
+        <div className="lead-grid">
+          {EVENTS.map((event, i) => (
+            <div key={event.id} className="lead-card reveal" style={{ transitionDelay: `${i * 0.07}s` }}>
+              {/* Photo placeholder / real photo */}
+              <div className="lead-photo-wrap">
+                <div className="lead-placeholder" style={{ background: event.color }}>
+                  <span style={{ fontSize: '48px' }}>{event.icon}</span>
+                  <span style={{
+                    fontSize: '10px',
+                    letterSpacing: '1.5px',
+                    textTransform: 'uppercase',
+                    color: 'rgba(255,255,255,0.25)',
+                    fontFamily: 'Syne, sans-serif',
+                  }}>
+                    event-{event.id}.jpg
+                  </span>
+                </div>
+                {/* Glow border */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: '2px',
+                  background: `linear-gradient(90deg, transparent, ${event.accent}, transparent)`,
+                }} />
+              </div>
+              <div className="lead-body">
+                <div className="lead-title">{event.title}</div>
+                <div className="lead-sub">{event.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
