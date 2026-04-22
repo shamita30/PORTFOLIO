@@ -169,11 +169,11 @@ export default function App() {
   // ── Audio (Christmas Playlist) ────────────────────────────────────
   const [songUrl, setSongUrl] = useState('')
   useEffect(() => {
+    // Relying strictly on local files eliminates any CORS, Hotlinking, or 403 barriers
+    // guaranteeing audio loads consistently across browser sessions.
     const songs = [
-      'https://archive.org/download/AllIWantForChristmasIsYou_201812/Mariah%20Carey%20-%20All%20I%20Want%20For%20Christmas%20Is%20You.mp3',
-      'https://archive.org/download/02.-last-christmas/02.%20Last%20Christmas.mp3',
-      'https://archive.org/download/frank-sinatra-let-it-snow-let-it-snow-let-it-snow/Frank%20Sinatra%20-%20Let%20It%20Snow%21%20Let%20It%20Snow%21%20Let%20It%20Snow%21.mp3',
-      'https://archive.org/download/jinglebellrock_201912/Bobby%20Helms%20-%20Jingle%20Bell%20Rock.mp3'
+      '/audio/away_in_a_manger.mp3',
+      '/audio/christmas_times.mp3'
     ]
     setSongUrl(songs[Math.floor(Math.random() * songs.length)])
   }, [])
