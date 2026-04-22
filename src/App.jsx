@@ -164,42 +164,36 @@ export default function App() {
     return () => obs.disconnect()
   }, [loaded])
 
-  // ── Christmas ambient sound ────────────────────────────────────
   useEffect(() => {
-    if (sound) {
+    if (audioRef.current) {
+      if (sound) {
+        audioRef.current.play().catch(e => console.warn('Audio play prevented:', e))
+      } else {
+        audioRef.current.pause()
+      }
+    }
+  }, [sound])
+
+  const handleEnterUniverse = () => {
+    setLoaded(true)
+    setSound(true)
+    
+    if (!audioRef.current) {
       const songs = [
         'https://archive.org/download/AllIWantForChristmasIsYou_201812/Mariah%20Carey%20-%20All%20I%20Want%20For%20Christmas%20Is%20You.mp3',
         'https://archive.org/download/02.-last-christmas/02.%20Last%20Christmas.mp3',
         'https://archive.org/download/frank-sinatra-let-it-snow-let-it-snow-let-it-snow/Frank%20Sinatra%20-%20Let%20It%20Snow%21%20Let%20It%20Snow%21%20Let%20It%20Snow%21.mp3',
         'https://archive.org/download/jinglebellrock_201912/Bobby%20Helms%20-%20Jingle%20Bell%20Rock.mp3'
       ]
-      
-      // Pick a random song we haven't played recently
-      let available = songs.filter(s => !playedAudios.current.has(s))
-      if (available.length === 0) {
-        playedAudios.current.clear()
-        available = songs
-      }
-      const selected = available[Math.floor(Math.random() * available.length)]
-      playedAudios.current.add(selected)
-
+      const selected = songs[Math.floor(Math.random() * songs.length)]
       const audio = new Audio(selected)
       audio.loop = true
       audio.volume = 0.4
-      
-      // Since sound becomes true ONLY when the user clicks 'Enter Universe', 
-      // the browser will allow this playback natively without blocking.
-      audio.play().catch(e => console.warn('Audio play prevented:', e))
-      
       audioRef.current = audio
-    } else {
-      if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current.currentTime = 0
-        audioRef.current = null
-      }
     }
-  }, [sound])
+    
+    audioRef.current.play().catch(e => console.warn('Audio play prevented on explicit click:', e))
+  }
 
   // ── Toggle theme (stores user preference, overrides system) ───
   const toggleTheme = () => {
@@ -215,10 +209,7 @@ export default function App() {
       {/* Loading */}
       <LoadingScreen 
         visible={!loaded} 
-        onEnter={() => { 
-          setLoaded(true)
-          setSound(true) // Ensure audio starts explicitly
-        }} 
+        onEnter={handleEnterUniverse} 
       />
 
       {/* Custom cursor */}
