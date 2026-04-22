@@ -57,11 +57,11 @@ function OrbitRings() {
     let t = 0
 
     const skills = [
-      { label: 'React', r: 60, speed: 0.8, color: '#06b6d4' },
-      { label: 'Solidity', r: 90, speed: -0.5, color: '#a855f7' },
-      { label: 'Python', r: 120, speed: 0.4, color: '#ff6eb4' },
-      { label: 'Three.js', r: 150, speed: -0.3, color: '#f97316' },
-      { label: 'Firebase', r: 50, speed: 1.1, color: '#3b82f6' },
+      { label: 'C++', r: 60, speed: 0.8, color: '#06b6d4' },
+      { label: 'Blockchain', r: 90, speed: -0.5, color: '#a855f7' },
+      { label: 'IoT', r: 120, speed: 0.4, color: '#ff6eb4' },
+      { label: 'Solidity', r: 150, speed: -0.3, color: '#f97316' },
+      { label: 'Blender', r: 50, speed: 1.1, color: '#3b82f6' },
     ]
 
     const draw = () => {

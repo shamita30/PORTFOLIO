@@ -165,19 +165,8 @@ export default function App() {
   }, [loaded])
 
   useEffect(() => {
-    if (audioRef.current) {
-      if (sound) {
-        audioRef.current.play().catch(e => console.warn('Audio play prevented:', e))
-      } else {
-        audioRef.current.pause()
-      }
-    }
-  }, [sound])
-
-  const handleEnterUniverse = () => {
-    setLoaded(true)
-    setSound(true)
-    
+    // Preload audio immediately when the site hits the Javascript thread
+    // This allows the browser to fetch the stream before the user clicks Enter
     if (!audioRef.current) {
       const songs = [
         'https://archive.org/download/AllIWantForChristmasIsYou_201812/Mariah%20Carey%20-%20All%20I%20Want%20For%20Christmas%20Is%20You.mp3',
@@ -189,10 +178,30 @@ export default function App() {
       const audio = new Audio(selected)
       audio.loop = true
       audio.volume = 0.4
+      audio.preload = 'auto'
       audioRef.current = audio
     }
+  }, [])
+
+  useEffect(() => {
+    // This useEffect only fires on the SOUND toggle button
+    if (audioRef.current && loaded) {
+      if (sound) {
+        audioRef.current.play().catch(e => console.warn('Audio play prevented on Sound toggle:', e))
+      } else {
+        audioRef.current.pause()
+      }
+    }
+  }, [sound, loaded])
+
+  const handleEnterUniverse = () => {
+    setLoaded(true)
+    setSound(true)
     
-    audioRef.current.play().catch(e => console.warn('Audio play prevented on explicit click:', e))
+    if (audioRef.current) {
+      // Must fire on the exact user-click thread directly
+      audioRef.current.play().catch(e => console.warn('Audio play prevented on explicit click:', e))
+    }
   }
 
   // ── Toggle theme (stores user preference, overrides system) ───
