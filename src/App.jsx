@@ -172,8 +172,8 @@ export default function App() {
     // Relying strictly on local files eliminates any CORS, Hotlinking, or 403 barriers
     // guaranteeing audio loads consistently across browser sessions.
     const songs = [
-      '/audio/instrumental_jingle.mp3',
-      '/audio/instrumental_deck.mp3'
+      '/audio/pixabay_deck.mp3',
+      '/audio/pixabay_jingle.mp3'
     ]
     setSongUrl(songs[Math.floor(Math.random() * songs.length)])
   }, [])
