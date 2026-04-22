@@ -2,25 +2,25 @@ import { useRef, useEffect } from 'react'
 
 const SKILLS = [
   {
-    icon: '💻',
+    icon: '🖥️',
     title: 'Languages',
     color: 'var(--pink)',
     tags: ['C', 'C++', 'Java', 'Python', 'SQL', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'Solidity'],
   },
   {
-    icon: '⚙️',
+    icon: '🤖',
     title: 'Frameworks',
     color: 'var(--purple)',
     tags: ['Spring Boot', 'Hibernate', 'Node.js', 'React', 'TypeScript'],
   },
   {
-    icon: '🛠️',
+    icon: '🧰',
     title: 'Tools & Platforms',
     color: 'var(--cyan)',
     tags: ['Figma', 'Blender', 'Firebase', 'Git', 'GitHub', 'MySQL', 'PowerPoint'],
   },
   {
-    icon: '📡',
+    icon: '🦾',
     title: 'Embedded & IoT',
     color: 'var(--orange)',
     tags: ['Arduino', 'ESP32', 'NodeMCU', 'Embedded C'],
@@ -32,13 +32,13 @@ const SKILLS = [
     tags: ['Solidity', 'Smart Contracts', 'DApps', 'Cryptocurrency'],
   },
   {
-    icon: '🎯',
+    icon: '🧠',
     title: 'Soft Skills',
     color: 'var(--pink)',
     tags: ['Leadership', 'Teamwork', 'Public Speaking', 'Problem Solving', 'Positive Influence'],
   },
   {
-    icon: '🧮',
+    icon: '📚',
     title: 'CS Fundamentals',
     color: 'var(--cyan)',
     tags: ['DSA', 'OOP', 'OS', 'Computer Networks', 'Data Science', 'ML Basics'],

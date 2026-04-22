@@ -148,7 +148,13 @@ export default function HeroSection() {
           </div>
           <div
             className="floating-chip"
-            style={{ bottom: '5%', right: '0%', animationDelay: '0.8s', borderColor: 'rgba(249,115,22,0.3)' }}
+            style={{ top: '60%', right: '-5%', animationDelay: '2.5s', borderColor: 'rgba(255,110,180,0.3)' }}
+          >
+            <span style={{ color: 'var(--pink)', fontWeight: 600 }}>💻</span> Full Stack Dev
+          </div>
+          <div
+            className="floating-chip"
+            style={{ bottom: '5%', right: '20%', animationDelay: '0.8s', borderColor: 'rgba(249,115,22,0.3)' }}
           >
             <span style={{ color: 'var(--orange)', fontWeight: 600 }}>📍</span> Chennai, India
           </div>

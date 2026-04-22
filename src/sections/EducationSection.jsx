@@ -14,7 +14,7 @@ export default function EducationSection() {
             <div className="edu-inst">SRM Valliammai Engineering College</div>
             <div className="edu-gpa">Bachelor of Technology, IT</div>
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-              <span className="gpa-badge">CGPA: 9.0</span>
+              <span className="gpa-badge">GPA: 9.0</span>
               <span className="gpa-badge" style={{ background: 'rgba(168,85,247,0.12)', borderColor: 'rgba(168,85,247,0.25)', color: 'var(--purple)' }}>
                 Overall: 8.8
               </span>

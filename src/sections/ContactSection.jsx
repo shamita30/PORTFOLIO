@@ -105,7 +105,7 @@ export default function ContactSection() {
                 { icon: '📞', label: '+91 9786619687', href: 'tel:+919786619687',  color: 'rgba(8,145,178,0.15)' },
                 { icon: '⚡', label: 'github.com/shamita30',  href: 'https://github.com/shamita30', color: 'rgba(124,58,237,0.15)', target: '_blank' },
                 { icon: '🌐', label: 'shamitaportfolio.netlify.app', href: 'https://shamitaportfolio.netlify.app/', color: 'rgba(234,88,12,0.15)', target: '_blank' },
-                { icon: '💼', label: 'LinkedIn Profile', href: '#', color: 'rgba(37,99,235,0.15)' },
+                { icon: '💼', label: 'LinkedIn Profile', href: 'https://www.linkedin.com/in/shamita-rathinaraj-3a52b0275?utm_source=share_via&utm_content=profile&utm_medium=member_android', color: 'rgba(37,99,235,0.15)', target: '_blank' },
               ].map(({ icon, label, href, color, target }) => (
                 <a
                   key={label}

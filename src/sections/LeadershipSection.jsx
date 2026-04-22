@@ -1,7 +1,7 @@
 const EVENTS = [
   {
     id: 1,
-    icon: '🚀',
+    icon: '🧑‍💻', // SIH Team Lead avatar
     title: 'SIH 2024 — Team Lead',
     sub: 'Smart India Hackathon Finalist. Led team to develop cryptocurrency transaction solutions.',
     color: 'linear-gradient(135deg, rgba(168,85,247,0.25), rgba(255,110,180,0.2))',
@@ -9,7 +9,7 @@ const EVENTS = [
   },
   {
     id: 2,
-    icon: '🎪',
+    icon: '👩‍💼', // Symposium Secretary avatar
     title: 'Symposium Secretary',
     sub: 'Collaborated with creative ideas for college event planning as an executive and organized events.',
     color: 'linear-gradient(135deg, rgba(6,182,212,0.25), rgba(59,130,246,0.2))',
@@ -17,7 +17,7 @@ const EVENTS = [
   },
   {
     id: 3,
-    icon: '🌐',
+    icon: '👩‍🎤', // MUN Press avatar
     title: 'MUN — International Press',
     sub: 'Served as International Press in MUN club, covering global affairs and diplomatic discussions.',
     color: 'linear-gradient(135deg, rgba(249,115,22,0.25), rgba(255,110,180,0.2))',
@@ -25,7 +25,7 @@ const EVENTS = [
   },
   {
     id: 4,
-    icon: '📋',
+    icon: '👩‍🏫', // National Conference Coordinator avatar
     title: 'National Conference 2025',
     sub: 'Student Co-Ordinator for National conference 2025, managing sessions and participants.',
     color: 'linear-gradient(135deg, rgba(255,110,180,0.25), rgba(168,85,247,0.2))',
@@ -33,7 +33,7 @@ const EVENTS = [
   },
   {
     id: 5,
-    icon: '🏆',
+    icon: '👩‍🎓', // Best Student avatar
     title: 'Best Student Award',
     sub: 'Recognized as Best Student by the institution for outstanding academic and extracurricular performance.',
     color: 'linear-gradient(135deg, rgba(34,211,238,0.25), rgba(6,182,212,0.2))',
@@ -41,7 +41,7 @@ const EVENTS = [
   },
   {
     id: 6,
-    icon: '♟️',
+    icon: '🥷', // Chess participant avatar
     title: 'Chess Tournament Participant',
     sub: 'Competitive chess player, representing the college in inter-college chess tournaments.',
     color: 'linear-gradient(135deg, rgba(59,130,246,0.25), rgba(168,85,247,0.2))',
@@ -62,12 +62,7 @@ export default function LeadershipSection() {
           Beyond code — leading teams, organizing events, and making an impact in the community.
         </p>
 
-        <div className="upload-hint-banner reveal">
-          <span style={{ fontSize: '20px' }}>📷</span>
-          <span>
-            <strong>Add Event Photos:</strong> Upload images to <code style={{ background: 'rgba(255,255,255,0.08)', padding: '2px 6px', borderRadius: '4px' }}>/public/uploads/events/</code> to display your event gallery
-          </span>
-        </div>
+
 
         <div className="lead-grid">
           {EVENTS.map((event, i) => (
@@ -75,16 +70,7 @@ export default function LeadershipSection() {
               {/* Photo placeholder / real photo */}
               <div className="lead-photo-wrap">
                 <div className="lead-placeholder" style={{ background: event.color }}>
-                  <span style={{ fontSize: '48px' }}>{event.icon}</span>
-                  <span style={{
-                    fontSize: '10px',
-                    letterSpacing: '1.5px',
-                    textTransform: 'uppercase',
-                    color: 'rgba(255,255,255,0.25)',
-                    fontFamily: 'Syne, sans-serif',
-                  }}>
-                    event-{event.id}.jpg
-                  </span>
+                  <span style={{ fontSize: '64px', filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.4))' }}>{event.icon}</span>
                 </div>
                 {/* Glow border */}
                 <div style={{

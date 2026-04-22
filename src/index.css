@@ -773,8 +773,10 @@ body {
 }
 
 .skill-cat-icon {
-  font-size: 24px;
+  font-size: 32px;
   margin-bottom: 12px;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
+  transform: translateZ(20px);
 }
 
 .skill-cat-title {
@@ -958,12 +960,13 @@ body {
   cursor: none;
   transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
   position: relative;
+  transform-style: preserve-3d;
 }
 
 .cert-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px rgba(249,115,22,0.1);
-  border-color: rgba(249,115,22,0.3);
+  transform: perspective(1000px) rotateX(3deg) rotateY(-3deg) translateY(-8px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 50px rgba(249,115,22,0.15);
+  border-color: rgba(249,115,22,0.4);
 }
 
 .cert-img-wrap {

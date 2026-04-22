@@ -42,7 +42,7 @@ function getInitialTheme() {
 export default function App() {
   const [loaded,        setLoaded]        = useState(false)
   const [theme,         setTheme]         = useState(getInitialTheme)
-  const [sound,         setSound]         = useState(false)
+  const [sound,         setSound]         = useState(true)
   const [activeSection, setActiveSection] = useState('hero')
   const [mousePos,      setMousePos]      = useState({ x: 0, y: 0 })
 
@@ -170,9 +170,10 @@ export default function App() {
   useEffect(() => {
     if (sound) {
       const songs = [
-        'https://leedsharmonica.uk/resources/xmas-songs/mp3/We-Wish-You-A-Merry-Christmas.mp3',
-        'https://leedsharmonica.uk/resources/xmas-songs/mp3/Jingle-Bells.mp3',
-        'https://leedsharmonica.uk/resources/xmas-songs/mp3/Deck-The-Halls.mp3'
+        'https://archive.org/download/AllIWantForChristmasIsYou_201812/Mariah%20Carey%20-%20All%20I%20Want%20For%20Christmas%20Is%20You.mp3',
+        'https://archive.org/download/02.-last-christmas/02.%20Last%20Christmas.mp3',
+        'https://archive.org/download/frank-sinatra-let-it-snow-let-it-snow-let-it-snow/Frank%20Sinatra%20-%20Let%20It%20Snow%21%20Let%20It%20Snow%21%20Let%20It%20Snow%21.mp3',
+        'https://archive.org/download/jinglebellrock_201912/Bobby%20Helms%20-%20Jingle%20Bell%20Rock.mp3'
       ]
       
       // Pick a random song we haven't played recently
@@ -266,13 +267,14 @@ export default function App() {
           {' '}by <span>Shamita Rathinaraj</span> · Chennai, India
         </p>
         <div className="social-links">
+          <a href="https://www.linkedin.com/in/shamita-rathinaraj-3a52b0275?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noreferrer" className="social-link" title="LinkedIn">💼</a>
           <a href="https://github.com/shamita30"             target="_blank" rel="noreferrer" className="social-link" title="GitHub">⚡</a>
           <a href="mailto:shami2230sr12@gmail.com"           className="social-link" title="Email">✉️</a>
           <a href="https://shamitaportfolio.netlify.app/"     target="_blank" rel="noreferrer" className="social-link" title="Portfolio">🌐</a>
           <a href="tel:+919786619687"                        className="social-link" title="Phone">📞</a>
         </div>
         <p style={{ marginTop: 12, fontSize: '11px', opacity: 0.4 }}>
-          © 2025 Shamita Rathinaraj. All rights reserved.
+          © 2026 Shamita Rathinaraj. All rights reserved.
         </p>
       </footer>
     </SmoothScroll>
