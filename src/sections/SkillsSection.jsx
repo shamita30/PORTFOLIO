@@ -2,43 +2,43 @@ import { useRef, useEffect } from 'react'
 
 const SKILLS = [
   {
-    icon: '🖥️',
+    image: '/skills/languages.png',
     title: 'Languages',
     color: 'var(--pink)',
     tags: ['C', 'C++', 'Java', 'Python', 'SQL', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'Solidity'],
   },
   {
-    icon: '🤖',
+    image: '/skills/frameworks.png',
     title: 'Frameworks',
     color: 'var(--purple)',
     tags: ['Spring Boot', 'Hibernate', 'Node.js', 'React', 'TypeScript'],
   },
   {
-    icon: '🧰',
+    image: '/skills/tools.png',
     title: 'Tools & Platforms',
     color: 'var(--cyan)',
     tags: ['Figma', 'Blender', 'Firebase', 'Git', 'GitHub', 'MySQL', 'PowerPoint'],
   },
   {
-    icon: '🦾',
+    image: '/skills/iot.png',
     title: 'Embedded & IoT',
     color: 'var(--orange)',
     tags: ['Arduino', 'ESP32', 'NodeMCU', 'Embedded C'],
   },
   {
-    icon: '⛓️',
+    image: '/skills/blockchain.png',
     title: 'Blockchain',
     color: 'var(--blue)',
     tags: ['Solidity', 'Smart Contracts', 'DApps', 'Cryptocurrency'],
   },
   {
-    icon: '🧠',
+    image: '/skills/soft_skills.png',
     title: 'Soft Skills',
     color: 'var(--pink)',
     tags: ['Leadership', 'Teamwork', 'Public Speaking', 'Problem Solving', 'Positive Influence'],
   },
   {
-    icon: '📚',
+    image: '/skills/cs.png',
     title: 'CS Fundamentals',
     color: 'var(--cyan)',
     tags: ['DSA', 'OOP', 'OS', 'Computer Networks', 'Data Science', 'ML Basics'],
@@ -176,13 +176,18 @@ export default function SkillsSection() {
         </div>
 
         <div className="skills-grid reveal">
-          {SKILLS.map(({ icon, title, color, tags }) => (
+          {SKILLS.map(({ image, title, color, tags }) => (
             <div
               key={title}
               className="skill-cat"
               style={{ '--cat-color': color, color }}
             >
-              <div className="skill-cat-icon">{icon}</div>
+              <div className="skill-cat-img-wrap" style={{ 
+                width: '80px', height: '80px', marginBottom: '16px', borderRadius: '50%',
+                boxShadow: `0 0 20px ${color}40`, overflow: 'hidden', padding: '2px', background: `${color}20` 
+              }}>
+                <img src={image} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', animation: 'slow-revolve 12s linear infinite' }} />
+              </div>
               <div className="skill-cat-title" style={{ color }}>{title}</div>
               <div className="skill-tags">
                 {tags.map(tag => (

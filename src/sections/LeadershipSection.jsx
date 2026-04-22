@@ -43,7 +43,7 @@ const EVENTS = [
     id: 6,
     icon: '🥷', // Chess participant avatar
     title: 'Chess Tournament Participant',
-    sub: 'Competitive chess player, representing the college in inter-college chess tournaments.',
+    sub: 'Competitive chess player, representing the school in inter-school chess tournaments.',
     color: 'linear-gradient(135deg, rgba(59,130,246,0.25), rgba(168,85,247,0.2))',
     accent: '#3b82f6',
   },

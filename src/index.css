@@ -810,6 +810,12 @@ body {
   background: var(--bg-glass);
 }
 
+@keyframes slow-revolve {
+  from { transform: rotate(0deg) scale(1.0); }
+  50% { transform: rotate(180deg) scale(1.05); }
+  to { transform: rotate(360deg) scale(1.0); }
+}
+
 /* ── ORBIT SKILL VIZ ── */
 .orbit-viz {
   width: 100%;

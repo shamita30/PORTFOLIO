@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 const CERTIFICATES = [
   {
@@ -101,6 +101,70 @@ function CertModal({ cert, onClose }) {
   )
 }
 
+function TiltCard({ cert, delay, onClick }) {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 })
+  const [isHovered, setIsHovered] = useState(false)
+  const cardRef = useRef(null)
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const centerX = rect.width / 2
+    const centerY = rect.height / 2
+    
+    const rotateX = ((y - centerY) / centerY) * -12
+    const rotateY = ((x - centerX) / centerX) * 12
+    
+    setTilt({ x: rotateX, y: rotateY })
+  }
+
+  return (
+    <div
+      ref={cardRef}
+      className="cert-card reveal"
+      style={{
+        cursor: 'none',
+        transitionDelay: delay,
+        transform: isHovered 
+          ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateY(-8px) scale(1.02)` 
+          : 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)',
+        transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.5s ease',
+        zIndex: isHovered ? 10 : 1,
+      }}
+      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => { setIsHovered(false); setTilt({ x: 0, y: 0 }) }}
+    >
+      <div className="cert-img-wrap" style={{ height: '220px', overflow: 'hidden' }}>
+        <img 
+          src={cert.image} 
+          alt={cert.title} 
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+        />
+      </div>
+      <div className="cert-body">
+        <div className="cert-title">{cert.title}</div>
+        <div className="cert-org">{cert.org}</div>
+      </div>
+      
+      {/* 3D Glare effect */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: `radial-gradient(circle at ${50 + tilt.y * 2}% ${50 - tilt.x * 2}%, rgba(255,255,255,0.15), transparent 60%)`,
+        opacity: isHovered ? 1 : 0,
+        transition: 'opacity 0.3s',
+        pointerEvents: 'none',
+        zIndex: 5,
+        mixBlendMode: 'overlay',
+      }} />
+    </div>
+  )
+}
+
 export default function CertificatesSection() {
   const [selectedCert, setSelectedCert] = useState(null)
 
@@ -118,24 +182,12 @@ export default function CertificatesSection() {
 
         <div className="cert-grid">
           {CERTIFICATES.map((cert, i) => (
-            <div
-              key={cert.id}
-              className="cert-card reveal"
-              style={{ cursor: 'none', transitionDelay: `${i * 0.05}s` }}
-              onClick={() => setSelectedCert(cert)}
-            >
-              <div className="cert-img-wrap" style={{ height: '220px', overflow: 'hidden' }}>
-                <img 
-                  src={cert.image} 
-                  alt={cert.title} 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-                />
-              </div>
-              <div className="cert-body">
-                <div className="cert-title">{cert.title}</div>
-                <div className="cert-org">{cert.org}</div>
-              </div>
-            </div>
+            <TiltCard 
+              key={cert.id} 
+              cert={cert} 
+              delay={`${i * 0.05}s`} 
+              onClick={() => setSelectedCert(cert)} 
+            />
           ))}
         </div>
 

@@ -188,7 +188,18 @@ export default function App() {
       const audio = new Audio(selected)
       audio.loop = true
       audio.volume = 0.4
-      audio.play().catch(e => console.warn('Audio play prevented:', e))
+      
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(e => {
+          console.warn('Auto-play prevented, waiting for user click:', e);
+          const onInteract = () => {
+            audio.play().catch(err => console.warn('Still prevented:', err));
+            document.removeEventListener('click', onInteract);
+          };
+          document.addEventListener('click', onInteract);
+        });
+      }
       audioRef.current = audio
     } else {
       if (audioRef.current) {
