@@ -1,12 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-export default function LoadingScreen({ visible, onEnter }) {
-  const [ready, setReady] = useState(false)
-
-  useEffect(() => {
-    const t = setTimeout(() => setReady(true), 1500)
-    return () => clearTimeout(t)
-  }, [])
+export default function LoadingScreen({ visible }) {
   const canvasRef = useRef(null)
   const animRef = useRef(null)
   const tRef = useRef(0)
@@ -87,34 +81,10 @@ export default function LoadingScreen({ visible, onEnter }) {
       <canvas ref={canvasRef} className="warp-canvas" />
       <div className="loading-content">
         <div className="loading-logo">SR</div>
-        {!ready ? (
-          <>
-            <div className="loading-subtitle">Entering the Universe</div>
-            <div className="loading-bar-wrap">
-              <div className="loading-bar" />
-            </div>
-          </>
-        ) : (
-          <button 
-            onClick={onEnter} 
-            style={{
-              padding: '12px 32px',
-              background: 'rgba(168,85,247,0.2)',
-              border: '1px solid var(--purple)',
-              color: 'white',
-              fontFamily: 'Syne, sans-serif',
-              fontSize: '16px',
-              borderRadius: '30px',
-              cursor: 'none',
-              marginTop: '16px',
-              transition: 'all 0.3s',
-            }}
-            onMouseOver={e => { e.currentTarget.style.background = 'rgba(168,85,247,0.4)'; e.currentTarget.style.transform = 'scale(1.05)'; }}
-            onMouseOut={e => { e.currentTarget.style.background = 'rgba(168,85,247,0.2)'; e.currentTarget.style.transform = 'scale(1)'; }}
-          >
-            Enter Universe
-          </button>
-        )}
+        <div className="loading-subtitle">Entering the Universe</div>
+        <div className="loading-bar-wrap">
+          <div className="loading-bar" />
+        </div>
         <div style={{ fontSize: '11px', color: 'rgba(200,180,255,0.4)', letterSpacing: '2px', marginTop: '16px' }}>
           SHAMITA RATHINARAJ
         </div>

@@ -58,8 +58,10 @@ export default function App() {
   const rafRef           = useRef(null)
 
   // ── Loading ─────────────────────────────────────────────────────
-  // Loading is resolved by explicit user click on the LoadingScreen
-  // This guarantees user-interaction to allow Audio playback
+  useEffect(() => {
+    const t = setTimeout(() => setLoaded(true), 2400)
+    return () => clearTimeout(t)
+  }, [])
 
   // ── Apply theme to <html data-theme="..."> ─────────────────────
   useEffect(() => {
@@ -164,45 +166,34 @@ export default function App() {
     return () => obs.disconnect()
   }, [loaded])
 
+  // ── Audio (Christmas Playlist) + Sound toggle ────────────────────
   useEffect(() => {
-    // Preload audio immediately when the site hits the Javascript thread
-    // This allows the browser to fetch the stream before the user clicks Enter
-    if (!audioRef.current) {
-      const songs = [
-        'https://archive.org/download/AllIWantForChristmasIsYou_201812/Mariah%20Carey%20-%20All%20I%20Want%20For%20Christmas%20Is%20You.mp3',
-        'https://archive.org/download/02.-last-christmas/02.%20Last%20Christmas.mp3',
-        'https://archive.org/download/frank-sinatra-let-it-snow-let-it-snow-let-it-snow/Frank%20Sinatra%20-%20Let%20It%20Snow%21%20Let%20It%20Snow%21%20Let%20It%20Snow%21.mp3',
-        'https://archive.org/download/jinglebellrock_201912/Bobby%20Helms%20-%20Jingle%20Bell%20Rock.mp3'
-      ]
-      const selected = songs[Math.floor(Math.random() * songs.length)]
-      const audio = new Audio(selected)
-      audio.loop = true
-      audio.volume = 0.4
-      audio.preload = 'auto'
-      audioRef.current = audio
-    }
-  }, [])
-
-  useEffect(() => {
-    // This useEffect only fires on the SOUND toggle button
-    if (audioRef.current && loaded) {
-      if (sound) {
-        audioRef.current.play().catch(e => console.warn('Audio play prevented on Sound toggle:', e))
-      } else {
+    // This useEffect fires on the SOUND toggle button
+    if (sound) {
+      if (!audioRef.current) {
+        // High quality vocal tracks.
+        const songs = [
+          'https://archive.org/download/AllIWantForChristmasIsYou_201812/Mariah%20Carey%20-%20All%20I%20Want%20For%20Christmas%20Is%20You.mp3',
+          'https://archive.org/download/02.-last-christmas/02.%20Last%20Christmas.mp3',
+          'https://archive.org/download/frank-sinatra-let-it-snow-let-it-snow-let-it-snow/Frank%20Sinatra%20-%20Let%20It%20Snow%21%20Let%20It%20Snow%21%20Let%20It%20Snow%21.mp3',
+          'https://archive.org/download/jinglebellrock_201912/Bobby%20Helms%20-%20Jingle%20Bell%20Rock.mp3'
+        ]
+        const selected = songs[Math.floor(Math.random() * songs.length)]
+        const audio = new Audio(selected)
+        audio.loop = true
+        audio.volume = 0.4
+        audioRef.current = audio
+      }
+      
+      // We know this is within the toggle click execution block from the user clicking Navbar,
+      // so it plays immediately without blocking.
+      audioRef.current.play().catch(e => console.warn('Audio play prevented on Sound toggle:', e))
+    } else {
+      if (audioRef.current) {
         audioRef.current.pause()
       }
     }
-  }, [sound, loaded])
-
-  const handleEnterUniverse = () => {
-    setLoaded(true)
-    setSound(true)
-    
-    if (audioRef.current) {
-      // Must fire on the exact user-click thread directly
-      audioRef.current.play().catch(e => console.warn('Audio play prevented on explicit click:', e))
-    }
-  }
+  }, [sound])
 
   // ── Toggle theme (stores user preference, overrides system) ───
   const toggleTheme = () => {
@@ -216,10 +207,7 @@ export default function App() {
   return (
     <SmoothScroll>
       {/* Loading */}
-      <LoadingScreen 
-        visible={!loaded} 
-        onEnter={handleEnterUniverse} 
-      />
+      <LoadingScreen visible={!loaded} />
 
       {/* Custom cursor */}
       <div id="cursor"      ref={cursorRef} />
