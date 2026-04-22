@@ -149,6 +149,32 @@ function OrbitRings() {
   )
 }
 
+export default function SkillsSection() {
+  return (
+    <section id="skills" className="section-wrap" style={{ background: 'linear-gradient(180deg, transparent, rgba(255,110,180,0.03), transparent)' }}>
+      <div className="section-inner">
+        <div className="section-tag">Galaxy of Expertise</div>
+        <h2 className="section-title reveal">
+          Skills &{' '}
+          <span className="grad-pink">Tech Stack</span>
+        </h2>
+        <p className="section-sub reveal">
+          A broad range of technologies orbiting my core expertise in full-stack, blockchain, and embedded systems.
+        </p>
+
+        {/* Orbit visualization */}
+        <div className="reveal" style={{ marginBottom: '48px', display: 'flex', justifyContent: 'center' }}>
+          <div style={{
+            background: 'rgba(7,7,26,0.6)',
+            border: '1px solid var(--glass-border)',
+            borderRadius: '24px',
+            padding: '28px',
+            display: 'inline-block',
+          }}>
+            <OrbitRings />
+          </div>
+        </div>
+
         <div className="skills-grid reveal">
           {SKILLS.map(({ icon, title, color, tags }) => (
             <div
