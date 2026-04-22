@@ -34,7 +34,26 @@ export default function Navigation({ theme, toggleTheme, sound, setSound }) {
         ))}
       </ul>
       <div className="nav-right">
-        <button className="sound-btn" onClick={() => setSound(s => !s)} title={sound ? 'Mute space ambient' : 'Play space ambient'}>
+        <button 
+          className="sound-btn" 
+          title={sound ? 'Mute space ambient' : 'Play space ambient'}
+          onClick={() => {
+            const el = document.getElementById('bg-music')
+            if (el) {
+              // 0.2 volume to be gentle
+              el.volume = 0.2
+              if (sound) {
+                el.pause()
+                setSound(false)
+              } else {
+                // Firing synchronously in the user-click thread explicitly
+                el.play().then(() => setSound(true)).catch(e => console.warn(e))
+              }
+            } else {
+              setSound(!sound)
+            }
+          }}
+        >
           {sound ? '🔊' : '🔇'}
         </button>
         <button className="nav-theme-btn" onClick={toggleTheme}>

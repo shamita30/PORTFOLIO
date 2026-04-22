@@ -166,34 +166,17 @@ export default function App() {
     return () => obs.disconnect()
   }, [loaded])
 
-  // ── Audio (Christmas Playlist) + Sound toggle ────────────────────
+  // ── Audio (Christmas Playlist) ────────────────────────────────────
+  const [songUrl, setSongUrl] = useState('')
   useEffect(() => {
-    // This useEffect fires on the SOUND toggle button
-    if (sound) {
-      if (!audioRef.current) {
-        // High quality vocal tracks.
-        const songs = [
-          'https://archive.org/download/AllIWantForChristmasIsYou_201812/Mariah%20Carey%20-%20All%20I%20Want%20For%20Christmas%20Is%20You.mp3',
-          'https://archive.org/download/02.-last-christmas/02.%20Last%20Christmas.mp3',
-          'https://archive.org/download/frank-sinatra-let-it-snow-let-it-snow-let-it-snow/Frank%20Sinatra%20-%20Let%20It%20Snow%21%20Let%20It%20Snow%21%20Let%20It%20Snow%21.mp3',
-          'https://archive.org/download/jinglebellrock_201912/Bobby%20Helms%20-%20Jingle%20Bell%20Rock.mp3'
-        ]
-        const selected = songs[Math.floor(Math.random() * songs.length)]
-        const audio = new Audio(selected)
-        audio.loop = true
-        audio.volume = 0.4
-        audioRef.current = audio
-      }
-      
-      // We know this is within the toggle click execution block from the user clicking Navbar,
-      // so it plays immediately without blocking.
-      audioRef.current.play().catch(e => console.warn('Audio play prevented on Sound toggle:', e))
-    } else {
-      if (audioRef.current) {
-        audioRef.current.pause()
-      }
-    }
-  }, [sound])
+    const songs = [
+      'https://archive.org/download/AllIWantForChristmasIsYou_201812/Mariah%20Carey%20-%20All%20I%20Want%20For%20Christmas%20Is%20You.mp3',
+      'https://archive.org/download/02.-last-christmas/02.%20Last%20Christmas.mp3',
+      'https://archive.org/download/frank-sinatra-let-it-snow-let-it-snow-let-it-snow/Frank%20Sinatra%20-%20Let%20It%20Snow%21%20Let%20It%20Snow%21%20Let%20It%20Snow%21.mp3',
+      'https://archive.org/download/jinglebellrock_201912/Bobby%20Helms%20-%20Jingle%20Bell%20Rock.mp3'
+    ]
+    setSongUrl(songs[Math.floor(Math.random() * songs.length)])
+  }, [])
 
   // ── Toggle theme (stores user preference, overrides system) ───
   const toggleTheme = () => {
@@ -208,6 +191,9 @@ export default function App() {
     <SmoothScroll>
       {/* Loading */}
       <LoadingScreen visible={!loaded} />
+      
+      {/* Native HTML5 Audio Element for foolproof synchronous play */}
+      <audio id="bg-music" src={songUrl} loop preload="none" />
 
       {/* Custom cursor */}
       <div id="cursor"      ref={cursorRef} />
