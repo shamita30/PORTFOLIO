@@ -816,6 +816,16 @@ body {
   to { transform: rotate(360deg) scale(1.0); }
 }
 
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbit-counter-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
 /* ── ORBIT SKILL VIZ ── */
 .orbit-viz {
   width: 100%;

@@ -42,7 +42,7 @@ function getInitialTheme() {
 export default function App() {
   const [loaded,        setLoaded]        = useState(false)
   const [theme,         setTheme]         = useState(getInitialTheme)
-  const [sound,         setSound]         = useState(true)
+  const [sound,         setSound]         = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
   const [mousePos,      setMousePos]      = useState({ x: 0, y: 0 })
 
@@ -58,10 +58,8 @@ export default function App() {
   const rafRef           = useRef(null)
 
   // ── Loading ─────────────────────────────────────────────────────
-  useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 2400)
-    return () => clearTimeout(t)
-  }, [])
+  // Loading is resolved by explicit user click on the LoadingScreen
+  // This guarantees user-interaction to allow Audio playback
 
   // ── Apply theme to <html data-theme="..."> ─────────────────────
   useEffect(() => {
@@ -189,17 +187,10 @@ export default function App() {
       audio.loop = true
       audio.volume = 0.4
       
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(e => {
-          console.warn('Auto-play prevented, waiting for user click:', e);
-          const onInteract = () => {
-            audio.play().catch(err => console.warn('Still prevented:', err));
-            document.removeEventListener('click', onInteract);
-          };
-          document.addEventListener('click', onInteract);
-        });
-      }
+      // Since sound becomes true ONLY when the user clicks 'Enter Universe', 
+      // the browser will allow this playback natively without blocking.
+      audio.play().catch(e => console.warn('Audio play prevented:', e))
+      
       audioRef.current = audio
     } else {
       if (audioRef.current) {
@@ -222,7 +213,13 @@ export default function App() {
   return (
     <SmoothScroll>
       {/* Loading */}
-      <LoadingScreen visible={!loaded} />
+      <LoadingScreen 
+        visible={!loaded} 
+        onEnter={() => { 
+          setLoaded(true)
+          setSound(true) // Ensure audio starts explicitly
+        }} 
+      />
 
       {/* Custom cursor */}
       <div id="cursor"      ref={cursorRef} />

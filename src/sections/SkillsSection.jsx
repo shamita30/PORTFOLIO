@@ -149,6 +149,77 @@ function OrbitRings() {
   )
 }
 
+function SkillOrbitSystem({ skill }) {
+  const { image, title, color, tags } = skill;
+  const radius = window.innerWidth < 600 ? 100 : 130; 
+  
+  return (
+    <div className="skill-orbit-system" style={{ position: 'relative', width: '320px', height: '320px', margin: '0 auto 40px' }}>
+      {/* Orbit ring */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+        width: `${radius * 2}px`, height: `${radius * 2}px`, 
+        border: `1px dashed ${color}50`, borderRadius: '50%'
+      }} />
+
+      {/* Central image */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+        width: '110px', height: '110px', borderRadius: '50%', overflow: 'hidden',
+        boxShadow: `0 0 40px ${color}60`, border: `2px solid ${color}`,
+        zIndex: 10
+      }}>
+        <img src={image} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      </div>
+
+      {/* Orbiting tags container */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '50%',
+        width: 0, height: 0,
+        animation: 'orbit-spin 25s linear infinite',
+      }}>
+        {tags.map((tag, i) => {
+          const angle = (i / tags.length) * 360;
+          return (
+            <div key={tag} style={{
+              position: 'absolute',
+              transform: `rotate(${angle}deg) translateX(${radius}px) rotate(-${angle}deg)`,
+            }}>
+              {/* Counter-spin so the text stays upright relative to the screen */}
+              <div style={{ animation: 'orbit-counter-spin 25s linear infinite' }}>
+                <div className="skill-tag" style={{
+                  transform: 'translate(-50%, -50%)', // center exactly on orbital point
+                  background: 'rgba(7,7,26,0.9)',
+                  whiteSpace: 'nowrap',
+                  boxShadow: `0 0 15px ${color}30`,
+                  border: `1px solid ${color}80`,
+                  color: 'white',
+                  fontWeight: 500,
+                  fontSize: '11px',
+                  padding: '6px 12px'
+                }}>
+                  {tag}
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+      
+      {/* Title */}
+      <div style={{
+        position: 'absolute', bottom: '0', width: '100%', textAlign: 'center',
+        fontFamily: 'Syne, sans-serif', fontSize: '18px', fontWeight: 800, color,
+        textShadow: `0 0 10px ${color}`,
+        letterSpacing: '1px',
+        textTransform: 'uppercase'
+      }}>
+        {title}
+      </div>
+    </div>
+  )
+}
+
 export default function SkillsSection() {
   return (
     <section id="skills" className="section-wrap" style={{ background: 'linear-gradient(180deg, transparent, rgba(255,110,180,0.03), transparent)' }}>
@@ -175,26 +246,9 @@ export default function SkillsSection() {
           </div>
         </div>
 
-        <div className="skills-grid reveal">
-          {SKILLS.map(({ image, title, color, tags }) => (
-            <div
-              key={title}
-              className="skill-cat"
-              style={{ '--cat-color': color, color }}
-            >
-              <div className="skill-cat-img-wrap" style={{ 
-                width: '80px', height: '80px', marginBottom: '16px', borderRadius: '50%',
-                boxShadow: `0 0 20px ${color}40`, overflow: 'hidden', padding: '2px', background: `${color}20` 
-              }}>
-                <img src={image} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', animation: 'slow-revolve 12s linear infinite' }} />
-              </div>
-              <div className="skill-cat-title" style={{ color }}>{title}</div>
-              <div className="skill-tags">
-                {tags.map(tag => (
-                  <span key={tag} className="skill-tag">{tag}</span>
-                ))}
-              </div>
-            </div>
+        <div className="skills-grid reveal" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
+          {SKILLS.map((skill) => (
+            <SkillOrbitSystem key={skill.title} skill={skill} />
           ))}
         </div>
       </div>
